@@ -5,11 +5,14 @@ import java.util.Scanner;
 public class cardChecker {
 	static Scanner userLongInput = new Scanner(System.in);
 	static long number;
+	static int [] original;
+	static long [] doubleArray = new long[8];
 
 	public static void main(String[] args) 
 	{
 		welcome();
 		loadArray();
+		doubleDigits();
 	}
 	public static long welcome()
 	{
@@ -17,18 +20,47 @@ public class cardChecker {
 		number = userLongInput.nextLong();
 		return number;
 	}
-	public static long [] loadArray()
+	public static void loadArray()
 	{
-		long [] original = new long[16];
+		original = new int[16];
+		System.out.print(number);
+		int sum = 1;
 		while (number > 0)
 		{
-			int sum = 1;
-			long temporary = number % 10;
+			int temporary = (int) (number % 10);
 			number = number/10;
 			original[original.length - sum] = temporary;
+			sum ++;
 		}
-		System.out.println(original);
-		return original;
+		for (int i = 0; i < original.length; i++)
+		{
+			System.out.println(original[i]);
+		}
+		
+		//return original;
+	}
+	
+	public static void doubleDigits()
+	{
+		int sum2 = 0;
+		for (int i = 0; i < original.length - 2; i += 2)
+		{
+			long doubleDigit = original[i] * 2;
+			doubleArray[sum2] = doubleDigit;
+			sum2 ++;
+		}
+		for (int i = 0; i < original.length; i ++)
+		{
+			System.out.println(doubleArray[i]);
+		}
+		//return doubleArray;
+	}
+	public static void addDigits()
+	{
+		for(int i = 0; i < doubleArray.length; i ++)
+		{
+			
+		}
 	}
 
 }
