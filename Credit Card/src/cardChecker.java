@@ -12,7 +12,10 @@ public class cardChecker {
 	{
 		welcome();
 		loadArray();
+		System.out.println();
 		doubleDigits();
+		System.out.println();
+		goBack();
 	}
 	public static long welcome()
 	{
@@ -23,7 +26,6 @@ public class cardChecker {
 	public static void loadArray()
 	{
 		original = new int[16];
-		System.out.print(number);
 		int sum = 1;
 		while (number > 0)
 		{
@@ -34,7 +36,7 @@ public class cardChecker {
 		}
 		for (int i = 0; i < original.length; i++)
 		{
-			System.out.println(original[i]);
+			System.out.print(original[i]);
 		}
 		
 		//return original;
@@ -43,24 +45,48 @@ public class cardChecker {
 	public static void doubleDigits()
 	{
 		int sum2 = 0;
-		for (int i = 0; i < original.length - 2; i += 2)
+		for (int i = 0; i < original.length; i += 2)
 		{
-			long doubleDigit = original[i] * 2;
-			doubleArray[sum2] = doubleDigit;
+			int doubleDigit = original[i] * 2;
+			if (doubleDigit >= 10)
+			{
+				int left = doubleDigit/10;
+				int right = doubleDigit%10;
+				doubleDigit = left + right;
+				doubleArray[sum2] = doubleDigit;
+			}
+			else {
+				doubleArray[sum2] = doubleDigit;
+			}
 			sum2 ++;
 		}
-		for (int i = 0; i < original.length; i ++)
+		for (int i = 0; i < doubleArray.length; i ++)
 		{
-			System.out.println(doubleArray[i]);
+			System.out.print(doubleArray[i]);
 		}
 		//return doubleArray;
 	}
-	public static void addDigits()
+	public static void goBack()
 	{
-		for(int i = 0; i < doubleArray.length; i ++)
+		int sum3 = 0;
+		for (int j = 0; j < original.length; j += 2)
 		{
-			
+			original[j] = (int) doubleArray[sum3];
+			sum3++; 
 		}
+		int finalSum = 0;
+		for (int s = 0; s < original.length; s ++)
+		{
+			finalSum += original[s];
+		}
+		if (finalSum % 10 == 0)
+		{
+			System.out.println("This is a potentially valid credit card number!");
+		}
+		else {
+			System.out.println("This is not a valid credit card number!");
+		}
+		
 	}
 
 }
