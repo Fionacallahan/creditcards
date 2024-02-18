@@ -7,9 +7,11 @@ public class cardChecker {
 	static long number;
 	static int [] original;
 	static long [] doubleArray = new long[8];
+	static int credit;
 
 	public static void main(String[] args) 
 	{
+		//extraCredit();
 		welcome();
 		loadArray();
 		System.out.println();
@@ -23,7 +25,25 @@ public class cardChecker {
 		number = userLongInput.nextLong();
 		return number;
 	}
-	public static void loadArray()
+	public static void extraCredit()
+	{
+		credit = 0;
+		original = new int[16];
+		while (credit != 100)
+		{
+			for (int i = 0; i < 16; i ++)
+			{
+				int random = (int)(Math.random()*10);
+				original[i] = random;
+			}
+			//loadArray();
+			//System.out.println();
+			doubleDigits();
+			//System.out.println();
+			goBack();
+		}
+	}
+	public static int[] loadArray()
 	{
 		original = new int[16];
 		int sum = 1;
@@ -39,10 +59,10 @@ public class cardChecker {
 			System.out.print(original[i]);
 		}
 		
-		//return original;
+		return original;
 	}
 	
-	public static void doubleDigits()
+	public static long[] doubleDigits()
 	{
 		int sum2 = 0;
 		for (int i = 0; i < original.length; i += 2)
@@ -64,7 +84,7 @@ public class cardChecker {
 		{
 			System.out.print(doubleArray[i]);
 		}
-		//return doubleArray;
+		return doubleArray;
 	}
 	public static void goBack()
 	{
@@ -81,7 +101,12 @@ public class cardChecker {
 		}
 		if (finalSum % 10 == 0)
 		{
-			System.out.println("This is a potentially valid credit card number!");
+			//for (int i = 0; i < original.length; i++)
+			//{
+				//System.out.print(original[i]);
+			//}
+			System.out.println(": This is a potentially valid credit card number!");
+			//credit++;
 		}
 		else {
 			System.out.println("This is not a valid credit card number!");
